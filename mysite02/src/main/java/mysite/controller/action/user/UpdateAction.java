@@ -1,44 +1,48 @@
 package mysite.controller.action.user;
 
-import mysite.controller.ActionServlet;
-import mysite.controller.ActionServlet.Action;
-import mysite.dao.UserDao;
-import mysite.vo.UserVo;
+import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+
+import mysite.controller.ActionServlet.Action;
+import mysite.dao.UserDao;
+import mysite.vo.UserVo;
 
 public class UpdateAction implements Action {
 
-    @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        UserVo vo = (UserVo)session.getAttribute("authUser");
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		// Access Control
+		if(session == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		///////////////////////////////////////////////////////////
 
-        Long id = vo.getId();
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String gender = request.getParameter("gender");
-        System.out.println("들어온 성별--------->"+gender);
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		String gender = request.getParameter("gender");
+		
+		UserVo vo = new UserVo();
+		vo.setId(authUser.getId());
+		vo.setName(name);
+		vo.setPassword(password);
+		vo.setGender(gender);
+		
+		new UserDao().update(vo);
+		authUser.setName(name);
+		
+		response.sendRedirect(request.getContextPath() + "/user?a=updateform&result=success");
+	}
 
-        UserVo updatedVo = new UserVo();
-        updatedVo.setId(id);
-        updatedVo.setName(name);
-        updatedVo.setPassword(password);
-        updatedVo.setGender(gender);
-
-        if(password != ""){
-            new UserDao().updateWithPassword(id,updatedVo);
-        }else{
-            new UserDao().updateWithOutPassword(id,updatedVo);
-        }
-
-        session.setAttribute("authUser", updatedVo);
-
-        response.sendRedirect(request.getContextPath());
-    }
 }

@@ -4,7 +4,14 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import mysite.controller.action.main.MainAction;
-import mysite.controller.action.user.*;
+import mysite.controller.action.user.JoinAction;
+import mysite.controller.action.user.JoinFormAction;
+import mysite.controller.action.user.JoinSuccessAction;
+import mysite.controller.action.user.LoginAction;
+import mysite.controller.action.user.LoginFormAction;
+import mysite.controller.action.user.LogoutAction;
+import mysite.controller.action.user.UpdateAction;
+import mysite.controller.action.user.UpdateFormAction;
 
 @WebServlet("/user")
 public class UserServlet extends ActionServlet {
@@ -18,7 +25,7 @@ public class UserServlet extends ActionServlet {
 		"login", new LoginAction(),
 		"logout", new LogoutAction(),
 		"updateform", new UpdateFormAction(),
-			"update", new UpdateAction()
+		"update", new UpdateAction()
 	);
 	
 	@Override
