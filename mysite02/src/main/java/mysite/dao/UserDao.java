@@ -15,7 +15,7 @@ public class UserDao {
 		
 		try (
 			Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("insert into users values(null, ?, ?, ?, ?, now())");
+			PreparedStatement pstmt = conn.prepareStatement("insert into user values(null, ?, ?, ?, ?, now())");
 		) {
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getEmail());
@@ -35,7 +35,7 @@ public class UserDao {
 		
 		try (
 			Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("select id, name from users where email=? and password=?");
+			PreparedStatement pstmt = conn.prepareStatement("select id, name from user where email=? and password=?");
 		) {
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
@@ -63,7 +63,7 @@ public class UserDao {
 		
 		try (
 			Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("select id, name, email, gender from users where id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("select id, name, email, gender from user where id = ?");
 		) {
 				
 			pstmt.setLong(1, userId);
@@ -94,8 +94,8 @@ public class UserDao {
 		
 		try (
 			Connection conn = getConnection();
-			PreparedStatement pstmt1 = conn.prepareStatement("update users set name=?, gender=? where id=?");
-			PreparedStatement pstmt2 = conn.prepareStatement("update users set name=?, password=?, gender=? where id=?");
+			PreparedStatement pstmt1 = conn.prepareStatement("update user set name=?, gender=? where id=?");
+			PreparedStatement pstmt2 = conn.prepareStatement("update user set name=?, password=?, gender=? where id=?");
 		) {
 			if("".equals(vo.getPassword())) {
 				pstmt1.setString(1, vo.getName());
