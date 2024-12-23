@@ -201,6 +201,51 @@ public class BoardDao {
         return list;
     }
 
+    public List<BoardVo> findAllWithPagingAndKwd(String kwd, int page, int pageSize) {
+        List<BoardVo> list = new ArrayList<>();
+        String sql = "SELECT b.id, b.title, b.g_no, b.o_no, b.depth, b.reg_date, b.hit, b.user_id, u.name " +
+                "FROM board b " +
+                "JOIN `user` u ON b.user_id = u.id " +
+                "WHERE b.title like ? OR b.contents like ? "+
+                "ORDER BY g_no DESC, o_no ASC " +
+                "LIMIT ?, ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            int offset = (page - 1) * pageSize;
+            pstmt.setString(1, kwd);
+            pstmt.setString(2, kwd);
+            pstmt.setInt(3, offset);
+            pstmt.setInt(4, pageSize);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BoardVo vo = new BoardVo();
+                    vo.setId(rs.getLong("id"));
+                    vo.setWriter(rs.getString("name"));
+                    vo.setTitle(rs.getString("title"));
+                    vo.setGNo(rs.getInt("g_no"));
+                    vo.setONo(rs.getInt("o_no"));
+                    vo.setDepth(rs.getInt("depth"));
+                    Timestamp timestamp = rs.getTimestamp("reg_date");
+                    if (timestamp != null) {
+                        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+                        // 원하는 형식으로 변환
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = localDateTime.format(formatter);
+                        vo.setRegDate(formattedDate); // regDate를 String으로 변경한 경우
+                    }
+                    vo.setHit(rs.getInt("hit"));
+                    vo.setUserId(rs.getLong("user_id"));
+                    list.add(vo);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Find all with paging failed: " + e);
+        }
+        return list;
+    }
+
     // Total Count: 게시물 총 개수 조회
     public int getTotalCount() {
         int count = 0;

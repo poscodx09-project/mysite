@@ -15,8 +15,8 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"/>
 	<div id="content">
 		<div id="board">
-			<form id="search_form" action="${pageContext.request.contextPath }/board?page=1" method="post">
-				<input type="text" id="kwd" name="kwd" value="">
+			<form id="search_form" action="${pageContext.request.contextPath }/board" method="get">
+				<input type="text" id="kwd" name="kwd" value="${kwd}" placeholder="검색어를 입력하세요">
 				<input type="submit" value="찾기">
 			</form>
 			<table class="tbl-ex">
