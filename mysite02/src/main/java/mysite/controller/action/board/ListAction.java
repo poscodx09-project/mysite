@@ -22,13 +22,16 @@ public class ListAction implements ActionServlet.Action {
         HttpSession session = request.getSession();
 
         // Access Control
-        if (session == null || session.getAttribute("authUser") == null) {
-            response.sendRedirect(request.getContextPath() + "/user?a=loginform");
+        if(session == null) {
+            response.sendRedirect(request.getContextPath());
             return;
         }
-
-        UserVo authUser = (UserVo) session.getAttribute("authUser");
-
+        UserVo authUser = (UserVo)session.getAttribute("authUser");
+        if(authUser == null) {
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        ///////////////////////////////////////////////////////////
         BoardDao dao = new BoardDao();
 
         // 페이징 처리 변수

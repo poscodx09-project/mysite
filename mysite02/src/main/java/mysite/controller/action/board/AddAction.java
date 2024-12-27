@@ -36,7 +36,7 @@ public class AddAction implements ActionServlet.Action {
         System.out.println("parameter -> " + type);
 
         BoardDao dao = new BoardDao();
-
+        // insert함수 호출
         if ("reply".equals(type)) {
             // 답글 처리
             int originalId = Integer.parseInt(request.getParameter("id")); // 원본 글 ID
