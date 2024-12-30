@@ -216,7 +216,7 @@ public class BoardRepository {
 
             int offset = (page - 1) * pageSize;
             pstmt.setString(1, kwd);
-            pstmt.setString(2, kwd);
+            pstmt.setString(2, "%" + kwd + "%");
             pstmt.setInt(3, offset);
             pstmt.setInt(4, pageSize);
 

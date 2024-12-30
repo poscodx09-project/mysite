@@ -32,6 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         /* 로그인 처리 */
         HttpSession session = request.getSession();
         session.setAttribute("authUser",authUser);
+        System.out.println("role =>" + authUser.getRole());
 
         response.sendRedirect(request.getContextPath());
 

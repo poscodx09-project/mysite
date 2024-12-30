@@ -1,5 +1,7 @@
 package mysite.controller;
 
+import mysite.security.Auth;
+import mysite.security.AuthUser;
 import mysite.service.BoardService;
 import mysite.vo.BoardVo;
 import mysite.vo.GuestbookVo;
@@ -17,6 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
+@Auth
 public class BoardController {
     private final BoardService boardService;
     public BoardController(BoardService boardService){
@@ -40,12 +43,7 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public String add(HttpSession session,@RequestParam("type") String type,@RequestParam(value = "id", required = false) Long id, Model model){
-        // Access Control
-        UserVo authUser = (UserVo)session.getAttribute("authUser");
-        if(authUser == null) {
-            return "redirect:/board";
-        }
+    public String add(@RequestParam("type") String type, @RequestParam(value = "id", required = false) Long id, Model model){
         // type 값 및 기본 데이터 전달
         model.addAttribute("type", type);
         model.addAttribute("id", id);
@@ -53,19 +51,11 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(HttpSession session,
+    public String add(@AuthUser UserVo authUser,
                       BoardVo vo,
                       @RequestParam("type") String type,
                       @RequestParam(value = "id", required = false) Long id,
                       Model model) {
-        // Access Control
-        UserVo authUser = (UserVo) session.getAttribute("authUser");
-        if (authUser == null) {
-            return "redirect:/board";
-        }
-
-        // type 및 id 출력
-        System.out.println("type -> " + type);
 
         if ("reply".equals(type)) {
             if (id == null) {
@@ -87,11 +77,7 @@ public class BoardController {
 
     @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
     public String update(@PathVariable Long id, HttpSession session,Model model){
-        // Access Control
-        UserVo authUser = (UserVo)session.getAttribute("authUser");
-        if(authUser == null) {
-            return "redirect:/board";
-        }
+
         BoardVo vo = boardService.getContents(id);
         model.addAttribute("vo",vo);
 
@@ -99,16 +85,12 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/update/{id}",method = RequestMethod.POST)
-    public String update(@PathVariable Long id, HttpSession session, BoardVo vo){
-        // Access Control
-        UserVo authUser = (UserVo)session.getAttribute("authUser");
-        if(authUser == null) {
-            return "redirect:/board";
-        }
+    public String update(@PathVariable Long id, BoardVo vo){
 
         boardService.updateContents(vo);
         return "redirect:/board";
     }
+
     @RequestMapping(value = "/view/{id}",method = RequestMethod.GET)
     public String view(@PathVariable Long id, Model model){
         BoardVo vo = boardService.getContents(id);
@@ -123,13 +105,7 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.POST)
-    public String delete(@PathVariable(name = "id") Long id, HttpSession session) {
-        // Access Control
-        UserVo authUser = (UserVo)session.getAttribute("authUser");
-        if(authUser == null) {
-            return "redirect:/board";
-        }
-
+    public String delete(@AuthUser UserVo authUser, @PathVariable(name = "id") Long id) {
         boardService.deleteContents(id,authUser.getId());
         return "redirect:/board";
     }

@@ -26,7 +26,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
             return false;
         }
 
-        return false;
+        return true;
     }
 
     @Override

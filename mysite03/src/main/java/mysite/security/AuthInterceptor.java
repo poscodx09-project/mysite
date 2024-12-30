@@ -23,15 +23,22 @@ public class AuthInterceptor implements HandlerInterceptor {
         // 2. Casting
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
-        // 3. @Auth
+        // 3. Handler에서 @Auth 가져오기
         Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 
-        // 4. @Auth가 없으면...
+        // 4. Handler메소드에서 @Auth가 없으면 클래스(타입)에서 @Auth 가져오기
+        if(auth == null){
+            auth = handlerMethod.getBeanType().getAnnotation(Auth.class);
+        }
+
+        // 5. @Auth가 없으면...
         if(auth == null){ // 인증이 필요없는 경우
             return true;
         }
 
-        // 5. @Auth가 붙어 있기 때문에 인증(Authentication) 여부 확인
+        // 6. @Auth가 붙어 있기 때문에 인증(Authentication) 여부 확인
+        // role에 따라서 실행되는 작업이 달라짐
+
         HttpSession session = request.getSession();
         UserVo authUser = (UserVo) session.getAttribute("authUser");
 
@@ -40,7 +47,18 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        // 6. @Auth가 붙어 있고 인증도 된 경우
+        String requiredRole = auth.role();
+        String userRole = authUser.getRole();
+
+        // 권한 검증 로직
+        if (requiredRole.equals("ADMIN") && userRole.equals("USER") || userRole != null ) {
+            // role이 USER인 경우 /admin/** 경로 접근 차단
+            if (request.getRequestURI().startsWith(request.getContextPath() + "/admin")) {
+                response.sendRedirect(request.getContextPath());
+                return false;
+            }
+        }
+        // 7. @Auth가 붙어 있고 인증도 된 경우
         return true;
     }
 
