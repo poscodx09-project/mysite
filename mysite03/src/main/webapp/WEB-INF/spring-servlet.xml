@@ -11,8 +11,28 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+
     <mvc:annotation-driven></mvc:annotation-driven>
+
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+
+    <!-- Interceptors -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/auth"/>
+            <bean class="mysite.security.LoginInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/user/logout"/>
+            <bean class="mysite.security.LogoutInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/user/update"/>
+            <bean class="mysite.security.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 <!--    <mvc:resources mapping="/js/**" location="/assets/js/"></mvc:resources>-->
 <!--    <mvc:resources mapping="/js/**" location="/assets/css/"></mvc:resources>-->
