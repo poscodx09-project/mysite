@@ -49,14 +49,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         String requiredRole = auth.role();
         String userRole = authUser.getRole();
+        System.out.println("User Role: " + authUser.getRole());
 
         // 권한 검증 로직
-        if (requiredRole.equals("ADMIN") && userRole.equals("USER") || userRole != null ) {
-            // role이 USER인 경우 /admin/** 경로 접근 차단
-            if (request.getRequestURI().startsWith(request.getContextPath() + "/admin")) {
-                response.sendRedirect(request.getContextPath());
-                return false;
-            }
+        if (requiredRole.equals("ADMIN") && (userRole == null || !userRole.equals("ADMIN"))) {
+            response.sendRedirect(request.getContextPath());
+            return false;
         }
         // 7. @Auth가 붙어 있고 인증도 된 경우
         return true;
