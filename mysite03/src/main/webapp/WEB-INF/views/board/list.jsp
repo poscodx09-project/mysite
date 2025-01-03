@@ -42,8 +42,8 @@
 						<td>${vo.writer}</td>
 						<td>${vo.hit}</td>
 						<td>${vo.regDate}</td>
-						<c:if test="${sessionScope.authUser != null}">
-							<td><a href="${pageContext.request.contextPath }/board/delete/${vo.id}" class="del">삭제</a></td>
+						<c:if test="${sessionScope.authUser != null && sessionScope.authUser.id == vo.userId}">
+							<td><a href="${pageContext.request.contextPath }/board/delete/${vo.id}" class="del"><img src="${pageContext.request.contextPath }/assets/images/recycle.png" alt="삭제 아이콘"></a></td>
 						</c:if>
 					</tr>
 				</c:forEach>

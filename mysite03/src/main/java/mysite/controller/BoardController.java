@@ -67,7 +67,6 @@ public class BoardController {
         } else {
             throw new IllegalArgumentException("Invalid type parameter: " + type);
         }
-
         // 글쓰기 로직 수행
         boardService.addContents(vo, type, id, authUser.getId());
 

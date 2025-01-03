@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+    <!-- 새 g_no 계산 -->
+    <select id="selectMaxGNo" resultType="int">
+        <![CDATA[
+            SELECT IFNULL(MAX(g_no), 0) + 1 FROM board
+        ]]>
+    </select>
+
+    <!-- 새 게시물 삽입 -->
+    <insert id="insertBoard" parameterType="boardvo">
+        <![CDATA[
+            INSERT INTO board (title, g_no, o_no, depth, reg_date, hit, contents, user_id)
+            VALUES (#{title}, #{gNo}, 0, 0, now(), 0, #{contents}, #{userId})
+        ]]>
+    </insert>
+
+    <!-- 답글 순서 조정 -->
+    <update id="updateOrderForReply" parameterType="boardvo">
+        <![CDATA[
+            UPDATE board
+            SET o_no = o_no + 1
+            WHERE g_no = #{gNo} AND o_no > #{oNo}
+            ]]>
+    </update>
+
+    <!-- 답글 삽입 -->
+    <insert id="insertReply" parameterType="boardvo">
+        <![CDATA[
+        INSERT INTO board (title, g_no, o_no, depth, reg_date, hit, contents, user_id)
+        VALUES (#{title}, #{gNo}, #{oNo}, #{depth}, NOW(), 0, #{contents}, #{userId})
+        ]]>
+    </insert>
+
+    <!-- 특정 게시물 조회 -->
+    <select id="findById" parameterType="long" resultType="boardvo">
+        <![CDATA[
+        SELECT id, title, g_no as gNo, o_no as oNo, depth, reg_date as redDate, hit, contents, user_id as userId
+        FROM board
+        WHERE id = #{id}
+                  ]]>
+    </select>
+
+    <!-- 게시물 수정 -->
+    <update id="updateBoard" parameterType="boardvo">
+        UPDATE board
+        SET title = #{title}, contents = #{contents}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 게시물 삭제 -->
+    <delete id="deleteBoard" parameterType="long">
+        DELETE FROM board WHERE id = #{id}
+    </delete>
+
+    <!-- 게시물 리스트 조회 -->
+    <select id="findAllWithPaging" parameterType="map" resultType="boardvo">
+        SELECT b.id, b.title, b.g_no as gNo, b.o_no as oNo, b.depth, b.reg_date as regDate, b.hit, b.user_id as userId, u.name AS writer
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+        ORDER BY g_no DESC, o_no ASC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 검색어 포함 게시물 조회 -->
+    <select id="findAllWithPagingAndKwd" parameterType="map" resultType="boardvo">
+        SELECT b.id, b.title, b.g_no as gNo, b.o_no as oNo, b.depth, b.reg_date as regDate, b.hit, b.user_id as userId, u.name AS writer
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+        WHERE b.title LIKE CONCAT('%', #{kwd}, '%') OR b.contents LIKE CONCAT('%', #{kwd}, '%')
+        ORDER BY g_no DESC, o_no ASC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 게시물 총 개수 -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM board
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="incrementHit" parameterType="long">
+        UPDATE board
+        SET hit = hit + 1
+        WHERE id = #{id}
+    </update>
+
+</mapper>
+

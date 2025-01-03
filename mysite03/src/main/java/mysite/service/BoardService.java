@@ -22,7 +22,8 @@ public class BoardService {
         if ("reply".equals(type)) {
             // 원본 글 정보 조회
             BoardVo originalPost = boardRepository.findById(id);
-
+            System.out.println("sss" + originalPost.getId());
+            System.out.println("111 testtest => "+ originalPost.getONo());
             if (originalPost != null) {
                 // 답글 데이터 설정
                 BoardVo replyPost = new BoardVo();
@@ -31,6 +32,7 @@ public class BoardService {
                 replyPost.setUserId(userId);
                 replyPost.setGNo(originalPost.getGNo()); // 그룹 번호는 원본 글과 동일
                 replyPost.setONo(originalPost.getONo()); // 답글의 순서
+                System.out.println("testtest => "+ originalPost.getONo());
                 replyPost.setDepth(originalPost.getDepth() + 1); // 답글의 깊이
 
                 // 답글 삽입
@@ -49,12 +51,10 @@ public class BoardService {
     }
 
     public BoardVo getContents(Long id) {
+        boardRepository.incrementHit(id);
         return boardRepository.findById(id);
     }
 
-//    public BoardVo getContents(Long id, Long userId) {
-//
-//    }
 
     public void updateContents(BoardVo vo) {
         boardRepository.update(vo);
