@@ -4,6 +4,7 @@ import mysite.security.Auth;
 import mysite.security.AuthUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,10 @@ public class UserController {
     }
 
     @RequestMapping(value="/join", method=RequestMethod.POST)
-    public String join(UserVo userVo) {
+    public String join(BindingResult bindingResult, UserVo userVo) {
+        if (bindingResult.hasErrors()) {
+            return "user/join"; // 유효성 검사가 실패하면 다시 폼 페이지로 이동
+        }
         userService.join(userVo);
         return "redirect:/user/joinsuccess";
     }
