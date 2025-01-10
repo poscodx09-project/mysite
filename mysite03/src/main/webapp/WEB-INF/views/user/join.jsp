@@ -9,56 +9,97 @@
 <head>
 	<title>mysite</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+	<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+	<script>
+		$(function (){
+			console.log("dom loaded!");
+			var $el = $("#btn-check");
+			$el.click(function (){
+				var email = $("#email").val();
+				console.log("email : " + email);
+
+				if(email == ""){
+					return ;
+				}
+
+				$.ajax({
+					url: "${pageContext.request.contextPath}/api/user/checkemail?email=" + email,
+					type: "get",
+					dataType: "json",
+					success: function (response){
+						 if(response.exist){
+							 alert("이메일이 존재합니다. 다른 이메일을 사용해 주세요.");
+							 $("#email").val("");
+							 $("#email").focus();
+							 return ;
+						 }
+						 $("#img-check").show();
+						 $("#btn-check").hide();
+					},
+					error: function (xhr, status, error){
+						console.error(error);
+					}
+				});
+			})
+		});
+	</script>
 </head>
 <body>
 <div id="container">
-	<c:import url="/WEB-INF/views/includes/header.jsp"/>
+	<c:import url="/WEB-INF/views/includes/header.jsp" />
 	<div id="content">
 		<div id="user">
-			<form:form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join" modelAttribute="user">
 
-				<!-- Name Field -->
-				<label class="block-label" for="name"><spring:message code="user.join.label.name"/></label>
-				<form:input id="name" path="name" />
-				<form:errors path="name" cssClass="error" />
+			<form:form
+					modelAttribute="userVo"
+					id="join-form"
+					name="joinForm"
+					method="post"
+					action="${pageContext.request.contextPath}/user/join">
 
-				<!-- Email Field -->
-				<label class="block-label" for="email"><spring:message code="user.join.label.email"/></label>
-				<form:input id="email" path="email" />
-				<form:errors path="email" cssClass="error" />
-				<input type="button" value="<spring:message code='user.join.label.email.check'/>" />
+				<label class="block-label" for="name"><spring:message code="user.join.label.name" /></label>
+				<form:input path="name" id="name"/>
+				<p style="color:#f00; text-align:left; padding:0">
+					<form:errors path="name" />
+				</p>
 
-				<!-- Password Field -->
-				<label class="block-label"><spring:message code="user.join.label.password"/></label>
-				<form:password path="password" />
-				<form:errors path="password" cssClass="error" />
+				<spring:message code="user.join.label.email.check" var="userJoinLabelEmailCheck" />
+				<label class="block-label" for="email"><spring:message code="user.join.label.email" /></label>
+				<form:input path="email" id="email"/>
+				<input id="btn-check" type="button" value="${userJoinLabelEmailCheck }" style="display:;">
+				<img id="img-check" src="${pageContext.request.contextPath}/assets/images/check.png" style="vertical-align:bottom; width:20px; display: none;">
+				<p style="color:#f00; text-align:left; padding:0">
+					<form:errors path="email" />
+				</p>
 
-				<!-- Gender Field -->
+				<label class="block-label"><spring:message code="user.join.label.password" /></label>
+				<form:password path="password" id="password"/>
+				<p style="color:#f00; text-align:left; padding:0">
+					<form:errors path="password" />
+				</p>
+
+				<spring:message code="user.join.label.gender.male" var="userJoinLabelGenderMale"/>
+				<spring:message code="user.join.label.gender.female" var="userJoinLabelGenderFemale"/>
 				<fieldset>
-					<legend><spring:message code="user.join.label.gender"/></legend>
-					<label><spring:message code="user.join.label.gender.female"/></label>
-					<form:radiobutton path="gender" value="female" />
-					<label><spring:message code="user.join.label.gender.male"/></label>
-					<form:radiobutton path="gender" value="male" />
-					<form:errors path="gender" cssClass="error" />
+					<legend><spring:message code="user.join.label.gender" /></legend>
+					<form:radiobutton path="gender" value="female" label="${userJoinLabelGenderFemale }" checked="checked" />
+					<form:radiobutton path="gender" value="male" label="${userJoinLabelGenderMale }"/>
 				</fieldset>
 
-				<!-- Terms Agreement -->
 				<fieldset>
-					<legend><spring:message code="user.join.label.terms"/></legend>
-					<form:checkbox id="agree-prov" path="agreeProv" value="true" />
-					<label><spring:message code="user.join.label.terms.message"/></label>
-					<form:errors path="agreeProv" cssClass="error" />
+					<legend><spring:message code="user.join.label.terms" /></legend>
+					<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
+					<label><spring:message code="user.join.label.terms.message" /></label>
 				</fieldset>
 
-				<!-- Submit Button -->
-				<input type="submit" value="<spring:message code='user.join.button.signup'/>" />
+				<spring:message code="user.join.button.signup" var="userJoinButtonSignup"/>
+				<input type="submit" value="${userJoinButtonSignup }">
 			</form:form>
 		</div>
 	</div>
-	<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
-	<c:import url="/WEB-INF/views/includes/footer.jsp"/>
+	<c:import url="/WEB-INF/views/includes/navigation.jsp" />
+	<c:import url="/WEB-INF/views/includes/footer.jsp" />
 </div>
 </body>
 </html>

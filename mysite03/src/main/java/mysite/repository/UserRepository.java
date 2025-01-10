@@ -1,5 +1,6 @@
 package mysite.repository;
 
+import com.sun.jna.platform.win32.Netapi32Util;
 import mysite.vo.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class UserRepository {
 //        }
 //
 //        return count;
+    }
+
+    public UserVo findByEmail(String email) {
+//        Map<String,Object> map = Map.of("email",email);
+        return sqlSession.selectOne("user.findByEmail", email);
     }
 
     public UserVo findByEmailAndPassword(String email, String password) {
