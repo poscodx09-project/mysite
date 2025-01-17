@@ -14,7 +14,6 @@ import mysite.service.FileUploadService;
 import mysite.service.SiteService;
 import mysite.vo.SiteVo;
 
-@Auth(role="ADMIN")
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
