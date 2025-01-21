@@ -1,7 +1,8 @@
 package com.poscodx.mysite06.service;
 
-import mysite.repository.BoardRepository;
-import mysite.vo.BoardVo;
+
+import com.poscodx.mysite06.repository.BoardRepository;
+import com.poscodx.mysite06.vo.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

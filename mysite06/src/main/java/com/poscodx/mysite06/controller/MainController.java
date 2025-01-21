@@ -1,6 +1,6 @@
 package com.poscodx.mysite06.controller;
 
-import mysite.vo.UserVo;
+import com.poscodx.mysite06.vo.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.poscodx.mysite06.controller;
 
-import mysite.service.GuestbookService;
-import mysite.vo.GuestbookVo;
+import com.poscodx.mysite06.service.GuestbookService;
+import com.poscodx.mysite06.vo.GuestbookVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;

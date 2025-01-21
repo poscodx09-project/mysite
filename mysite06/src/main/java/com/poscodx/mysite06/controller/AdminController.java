@@ -1,9 +1,9 @@
 package com.poscodx.mysite06.controller;
 
+import com.poscodx.mysite06.service.FileUploadService;
+import com.poscodx.mysite06.service.SiteService;
+import com.poscodx.mysite06.vo.SiteVo;
 import jakarta.servlet.ServletContext;
-import mysite.service.FileUploadService;
-import mysite.service.SiteService;
-import mysite.vo.SiteVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;

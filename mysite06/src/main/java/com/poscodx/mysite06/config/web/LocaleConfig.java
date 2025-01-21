@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 public class LocaleConfig {
 	
 	//Locale Resolver
-	@Bean
+//	@Bean
 	public LocaleResolver localeResolver() {
 		CookieLocaleResolver localeResolver = new CookieLocaleResolver("lang");
 		localeResolver.setCookieHttpOnly(false);
@@ -23,7 +23,7 @@ public class LocaleConfig {
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("mysite/config/web/messages/message");
+		messageSource.setBasename("config/web/messages/message");
 		messageSource.setDefaultEncoding("utf-8");
 		
 		return messageSource;

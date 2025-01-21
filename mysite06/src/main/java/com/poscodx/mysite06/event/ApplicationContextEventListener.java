@@ -1,7 +1,7 @@
 package com.poscodx.mysite06.event;
 
-import mysite.service.SiteService;
-import mysite.vo.SiteVo;
+import com.poscodx.mysite06.service.SiteService;
+import com.poscodx.mysite06.vo.SiteVo;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

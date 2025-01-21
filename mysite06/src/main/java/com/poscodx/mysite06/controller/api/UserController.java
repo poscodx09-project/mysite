@@ -1,8 +1,9 @@
 package com.poscodx.mysite06.controller.api;
 
-import mysite.dto.JsonResult;
-import mysite.service.UserService;
-import mysite.vo.UserVo;
+
+import com.poscodx.mysite06.dto.JsonResult;
+import com.poscodx.mysite06.service.UserService;
+import com.poscodx.mysite06.vo.UserVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,7 @@ import java.util.Map;
 @RestController("userApiController")
 @RequestMapping("/api/user")
 public class UserController {
-	private UserService userService;
+	private final UserService userService;
 	
 	public UserController(UserService userService) {
 		this.userService = userService;

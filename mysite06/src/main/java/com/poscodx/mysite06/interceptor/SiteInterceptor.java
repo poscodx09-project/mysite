@@ -1,9 +1,9 @@
 package com.poscodx.mysite06.interceptor;
 
+import com.poscodx.mysite06.service.SiteService;
+import com.poscodx.mysite06.vo.SiteVo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mysite.service.SiteService;
-import mysite.vo.SiteVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;

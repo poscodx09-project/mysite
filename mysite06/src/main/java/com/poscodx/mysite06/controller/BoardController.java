@@ -1,9 +1,10 @@
 package com.poscodx.mysite06.controller;
 
-import mysite.service.BoardService;
-import mysite.vo.BoardVo;
-import mysite.vo.UserVo;
-import mysite.web.util.WebUtil;
+
+import com.poscodx.mysite06.service.BoardService;
+import com.poscodx.mysite06.util.WebUtil;
+import com.poscodx.mysite06.vo.BoardVo;
+import com.poscodx.mysite06.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

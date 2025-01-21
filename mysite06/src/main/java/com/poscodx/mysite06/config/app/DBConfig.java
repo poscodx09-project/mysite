@@ -1,6 +1,6 @@
 package com.poscodx.mysite06.config.app;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:mysite/config/app/jdbc.properties")
+@PropertySource("classpath:config/app/jdbc.properties")
 public class DBConfig {
 	
 	@Autowired
@@ -20,9 +20,9 @@ public class DBConfig {
 	
 	@Bean
 	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
+		HikariDataSource dataSource = new HikariDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setJdbcUrl(env.getProperty("jdbc.url"));
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
 				

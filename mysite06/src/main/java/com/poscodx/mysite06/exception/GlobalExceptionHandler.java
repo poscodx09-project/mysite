@@ -1,9 +1,9 @@
 package com.poscodx.mysite06.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.poscodx.mysite06.dto.JsonResult;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mysite.dto.JsonResult;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

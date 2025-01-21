@@ -1,6 +1,7 @@
 package com.poscodx.mysite06.repository;
 
-import mysite.vo.SiteVo;
+
+import com.poscodx.mysite06.vo.SiteVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,11 @@
 package com.poscodx.mysite06.config.app;
 
+import com.poscodx.mysite06.repository.UserRepository;
+import com.poscodx.mysite06.security.UserDetailsServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mysite.repository.UserRepository;
-import mysite.security.UserDetailsServiceImpl;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
@@ -21,6 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+
 
 import java.io.IOException;
 
@@ -102,7 +104,7 @@ public class SecurityConfig {
     
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder(4); // 4 ~ 31 
+    	return new BCryptPasswordEncoder(4); // 4 ~ 31
     }
     
     @Bean

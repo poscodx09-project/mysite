@@ -1,6 +1,7 @@
 package com.poscodx.mysite06.security;
 
-import mysite.repository.UserRepository;
+
+import com.poscodx.mysite06.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

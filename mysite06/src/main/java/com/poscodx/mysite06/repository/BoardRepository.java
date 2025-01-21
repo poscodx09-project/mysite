@@ -1,6 +1,7 @@
 package com.poscodx.mysite06.repository;
 
-import mysite.vo.BoardVo;
+
+import com.poscodx.mysite06.vo.BoardVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

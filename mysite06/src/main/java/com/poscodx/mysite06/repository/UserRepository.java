@@ -1,7 +1,8 @@
 package com.poscodx.mysite06.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mysite.vo.UserVo;
+
+import com.poscodx.mysite06.vo.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 

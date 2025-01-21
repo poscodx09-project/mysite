@@ -1,8 +1,9 @@
 package com.poscodx.mysite06.service;
 
-import mysite.repository.GuestbookLogRepository;
-import mysite.repository.GuestbookRepository;
-import mysite.vo.GuestbookVo;
+
+import com.poscodx.mysite06.repository.GuestbookLogRepository;
+import com.poscodx.mysite06.repository.GuestbookRepository;
+import com.poscodx.mysite06.vo.GuestbookVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,8 @@
 package com.poscodx.mysite06.service;
 
-import mysite.repository.SiteRepository;
-import mysite.vo.SiteVo;
+
+import com.poscodx.mysite06.repository.SiteRepository;
+import com.poscodx.mysite06.vo.SiteVo;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,7 @@
 package com.poscodx.mysite06.config.web;
 
-import mysite.event.ApplicationContextEventListener;
-import mysite.interceptor.SiteInterceptor;
+import com.poscodx.mysite06.event.ApplicationContextEventListener;
+import com.poscodx.mysite06.interceptor.SiteInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

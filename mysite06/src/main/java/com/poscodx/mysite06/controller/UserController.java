@@ -1,8 +1,8 @@
 package com.poscodx.mysite06.controller;
 
+import com.poscodx.mysite06.service.UserService;
+import com.poscodx.mysite06.vo.UserVo;
 import jakarta.validation.Valid;
-import mysite.service.UserService;
-import mysite.vo.UserVo;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

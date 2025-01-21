@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@PropertySource("classpath:mysite/config/web/fileupload.properties")
+@PropertySource("classpath:config/web/fileupload.properties")
 public class FileUploadConfig implements WebMvcConfigurer {
 	@Autowired
 	private Environment env;

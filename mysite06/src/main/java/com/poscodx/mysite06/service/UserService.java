@@ -1,7 +1,8 @@
 package com.poscodx.mysite06.service;
 
-import mysite.repository.UserRepository;
-import mysite.vo.UserVo;
+
+import com.poscodx.mysite06.repository.UserRepository;
+import com.poscodx.mysite06.vo.UserVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
