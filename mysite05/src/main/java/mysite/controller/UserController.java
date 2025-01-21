@@ -55,8 +55,7 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
-	
-	@Auth
+
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(/*HttpSession session,*/Authentication authentication, Model model) {
 		// 1. HttpSession을 사용하는 방법
@@ -76,7 +75,7 @@ public class UserController {
 		return "user/update";
 	}
 
-	@Auth
+
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(Authentication authentication, UserVo userVo) {
 		UserVo authUser = (UserVo)authentication.getPrincipal();
