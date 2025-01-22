@@ -1,7 +1,7 @@
-package com.poscodx.mysite06.config;
+package com.poscodx.mysite07.config;
 
-import com.poscodx.mysite06.repository.UserRepository;
-import com.poscodx.mysite06.security.UserDetailsServiceImpl;
+import com.poscodx.mysite07.repository.UserRepository;
+import com.poscodx.mysite07.security.UserDetailsServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
