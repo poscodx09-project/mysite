@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @EnableAspectJAutoProxy
-@Import({MvcConfig.class, LocaleConfig.class, FileUploadConfig.class})
-@ComponentScan({"com.poscodx.mysite06.controller", "com.poscodx.mysite06.exception"})
+//@Import({MvcConfig.class, LocaleConfig.class, FileUploadConfig.class})
+//@ComponentScan({"com.poscodx.mysite06.controller", "com.poscodx.mysite06.exception"})
 public class WebConfig {
 }

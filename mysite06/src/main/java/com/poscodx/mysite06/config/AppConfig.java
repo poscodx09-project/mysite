@@ -13,7 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-@Import({DBConfig.class, MyBatisConfig.class, SecurityConfig.class})
-@ComponentScan(basePackages={"com.poscodx.mysite06.service", "com.poscodx.mysite06.repository", "com.poscodx.mysite06.aspect"})
+//@Import({DBConfig.class, MyBatisConfig.class, SecurityConfig.class})
+//@ComponentScan(basePackages={"com.poscodx.mysite06.service", "com.poscodx.mysite06.repository", "com.poscodx.mysite06.aspect"})
 public class AppConfig {
+
 }

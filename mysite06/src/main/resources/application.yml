@@ -1,0 +1,25 @@
+server:
+  port: 8087
+
+
+spring:
+  application:
+    name: mysite06
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+  main:
+    allow-bean-definition-overriding: true
+
+#  thymeleaf:
+#    check-template-location: true
+#    mode: HTML
+#    prefix: classpath:templates/
+#    suffix: .html
+#    encoding: UTF-8
+#    view-names: th/*
+#    cache: false
