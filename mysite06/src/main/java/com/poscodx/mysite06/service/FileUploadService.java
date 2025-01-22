@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Optional;
 
 @Service
-@PropertySource("classpath:config/web/fileupload.properties")
+@PropertySource("classpath:config/fileupload.properties")
 public class FileUploadService {
 	@Autowired
 	private Environment env;

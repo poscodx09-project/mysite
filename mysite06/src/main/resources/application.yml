@@ -1,10 +1,17 @@
 server:
   port: 8087
-
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
 
 spring:
   application:
     name: mysite06
+
+  messages:
+    basename: messages/message
+    encoding: utf-8
 
   devtools:
     livereload:
@@ -14,6 +21,46 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
+
+  aop:
+    auto: true
+    proxy-target-class: true
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.0.42:3306/webdb
+    username: webdb
+    password: webdb
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 100
+
+  web:
+    resources:
+      static-locations: [ classpath:assets/, file:/mysite-uploads/ ]
+
+  mvc:
+    static-path-pattern: /assets/**
+
+
+  #    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10485760
+      max-request-size: 104857600
+      file-size-threshold: 5242880
+
+
+
+mybatis:
+  config-location: classpath:mybatis/configuration.xml
+
+logging:
+  config: classpath:logback.xml
 
 #  thymeleaf:
 #    check-template-location: true

@@ -1,4 +1,4 @@
-package com.poscodx.mysite06.config.app;
+package com.poscodx.mysite06.config;
 
 import com.poscodx.mysite06.repository.UserRepository;
 import com.poscodx.mysite06.security.UserDetailsServiceImpl;
@@ -87,16 +87,16 @@ public class SecurityConfig {
 
         			.anyRequest()
         			.permitAll();
-        	})
-			.exceptionHandling((exceptionHandlingConfigurer)->{
-//				exceptionHandlingConfigurer.accessDeniedPage("/errors/403");
-				exceptionHandlingConfigurer.accessDeniedHandler(new AccessDeniedHandler() {
-					@Override
-					public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-						response.sendRedirect(request.getContextPath());
-					}
-				});
-			});
+        	});
+//			.exceptionHandling((exceptionHandlingConfigurer)->{
+////				exceptionHandlingConfigurer.accessDeniedPage("/errors/403");
+//				exceptionHandlingConfigurer.accessDeniedHandler(new AccessDeniedHandler() {
+//					@Override
+//					public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+//						response.sendRedirect(request.getContextPath());
+//					}
+//				});
+//			});
         
     	return http.build();
     }

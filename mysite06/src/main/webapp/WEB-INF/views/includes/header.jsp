@@ -35,13 +35,13 @@ window.addEventListener("load", function() {
 			</div>			
 			<ul>
 				<sec:authorize access="!isAuthenticated()">
-    				<li><a href="${pageContext.request.contextPath}/user/login">로그인</a><li>
-    				<li><a href="${pageContext.request.contextPath}/user/join">회원가입</a><li>
+    				<li><a href="${pageContext.request.contextPath}/user/login"><spring:message code="header.gnb.login"/></a><li>
+    				<li><a href="${pageContext.request.contextPath}/user/join"><spring:message code="header.gnb.join"/></a><li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
     				<sec:authentication property="principal" var="authUser"/>
     				<li><a href="${pageContext.request.contextPath}/user/update">회원정보수정</a><li>
-    				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a><li>
+    				<li><a href="${pageContext.request.contextPath}/user/logout"><spring:message code="header.gnb.logout"/></a><li>
     				<li><spring:message code="header.gnb.greeting"/> ${authUser.name }</li>
 				</sec:authorize>	
 			</ul>
