@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WhitelabelErrorController implements ErrorController {
     // from global exceptionhandler
     @RequestMapping("/404")
-    public String error1(){
+    public String error_404(){
         return "errors/404";
+    }
+    @RequestMapping("/500")
+    public String error_500(){
+        return "errors/exception";
     }
 
     // from white label
@@ -25,7 +29,7 @@ public class WhitelabelErrorController implements ErrorController {
         if(status != null){
 
             int code = Integer.parseInt(status.toString());
-            if(code == HttpStatus.NOT_FOUND.value()){
+            if(code == HttpStatus.NOT_FOUND.value()) {
                 return "errors/404";
             } else if (code == HttpStatus.BAD_REQUEST.value()) {
                 return "errors/400";
@@ -34,7 +38,7 @@ public class WhitelabelErrorController implements ErrorController {
             }
 
         }
-        return "errors/exception";
+        return "errors/500";
     }
 
 }
